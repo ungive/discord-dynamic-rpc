@@ -15,24 +15,29 @@ and for retrieval of a Discord application ID for a given text.
 ## Table of Contents
 
 - [HTTP Endpoints](#http-endpoints)
-  - [Submit a Discord application client ID](#submit-a-discord-application-client-id)
+  - [Check if a submission is needed](#check-if-a-submission-is-needed)
     - [Request](#request)
+    - [Query parameters](#query-parameters)
     - [Status codes](#status-codes)
     - [Response body](#response-body)
-  - [Search a Discord application ID for a name](#search-a-discord-application-id-for-a-name)
+  - [Submit a Discord application client ID](#submit-a-discord-application-client-id)
     - [Request](#request-1)
-    - [Query parameters](#query-parameters)
     - [Status codes](#status-codes-1)
     - [Response body](#response-body-1)
-    - [Example](#example)
-  - [Report an inconsistent Discord application name](#report-an-inconsistent-discord-application-name)
+  - [Search a Discord application ID for a name](#search-a-discord-application-id-for-a-name)
     - [Request](#request-2)
     - [Query parameters](#query-parameters-1)
     - [Status codes](#status-codes-2)
     - [Response body](#response-body-2)
-  - [List all registered Discord applications](#list-all-registered-discord-applications)
+    - [Example](#example)
+  - [Report an inconsistent Discord application name](#report-an-inconsistent-discord-application-name)
     - [Request](#request-3)
+    - [Query parameters](#query-parameters-2)
     - [Status codes](#status-codes-3)
+    - [Response body](#response-body-3)
+  - [List all registered Discord applications](#list-all-registered-discord-applications)
+    - [Request](#request-4)
+    - [Status codes](#status-codes-4)
     - [Response](#response)
 - [WebSocket Endpoint](#websocket-endpoint)
     - [Searching a Discord application by name](#searching-a-discord-application-by-name)
@@ -43,6 +48,48 @@ and for retrieval of a Discord application ID for a given text.
 
 ## HTTP Endpoints
 
+### Check if a submission is needed
+
+Use this endpoint to check whether a submission is needed for a given name
+or if it will be rejected.
+
+#### Request
+
+```
+GET /check
+```
+
+#### Query parameters
+
+- (string) `name` The required name of the of the Discord application.
+  This parameter is required
+
+#### Status codes
+
+#### Response body
+
+```
+{
+    "name": "...",
+    "available": true,
+    "limit_reached": true
+}
+```
+
+The `name` is the name that was passed as a query parameter.
+
+`available` contains true when there is a Discord application registered
+that has the exact given name.
+When this is false, as submission is encouraged.
+When this is true, a submission may still be okay
+if the `limit_reached` key is false.
+
+`limit_reached` is set to true when there are a sufficient number
+of registered Discord applications for the given name.
+Making another submission is unnecessary and will always be rejected.
+When set to false, a submission is encouraged
+to have redundancy in case a registered application is deleted or renamed.
+
 ### Submit a Discord application client ID
 
 Use this endpoint to submit a Discord application client ID
@@ -50,6 +97,17 @@ together with the expected name of the Discord application.
 The name is verified with Discord and then stored in the database.
 The application name and the expected name must match exactly,
 the comparison is case-sensitive.
+
+Multiple submissions with the same name are allowed,
+but API clients should enforce some kind of mechanism
+to prevent resubmissions of Discord application client IDs with the same name,
+since it adds no value to have multiple registered Discord applications
+that are controlled by the same person.
+The point of multiple submissions and the resulting redundancy
+is to have fallback client IDs when one person decides to delete
+or maliciously rename all their submitted Discord applications.
+
+Check if a submission is necessary with the `/check` endpoint first.
 
 #### Request
 
@@ -69,7 +127,8 @@ POST /submit
   - The Discord application could not be found with the given client ID or
   - The application's name does not have the expected name
 - **409** Conflict
-  - There are too many registered Discord applications for this name already
+  - There are too many registered Discord applications for this name already or
+  - The submission was rejected for another reason
 - **502** Bad Gateway
   - Failed to verify the Discord application client ID
     with Discord the Discord API
