@@ -38,6 +38,8 @@ and for retrieval of a Discord application ID for a given text.
     - [Searching a Discord application by name](#searching-a-discord-application-by-name)
 - [Useful Discord endpoints](#useful-discord-endpoints)
   - [Verify the name of a Discord application](#verify-the-name-of-a-discord-application)
+- [Documentation](#documentation)
+  - [Steps to create a Discord application or submission](#steps-to-create-a-discord-application-or-submission)
 
 ## HTTP Endpoints
 
@@ -314,3 +316,21 @@ which should match with the name provided by the above endpoints.
 The `id` key represents the Discord application ID used for RPC,
 which should match the `discord_application_id`
 provided by the above endpoints.
+
+---
+
+## Documentation
+
+### Steps to create a Discord application or submission
+
+1. Open https://discord.com/developers/applications
+2. Click on the "New Application" button
+3. Enter the text you want to see in your status under "Name"
+4. Optionally, choose a "Team" to register the application under
+5. Click on "Create" to create the application
+6. A page should open with settings for the application
+7. Under "Settings" click on "OAuth2" to open the OAuth2 settings
+8. Under "Client information" there is a "Client ID".
+   Copy this to your clipboard
+9. Use the selected "Name" and the copied "Client ID"
+   for the `/submit` HTTP endpoint
