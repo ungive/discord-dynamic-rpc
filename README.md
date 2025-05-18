@@ -30,6 +30,10 @@ and for retrieval of a Discord application ID for a given text.
     - [Query parameters](#query-parameters-1)
     - [Status codes](#status-codes-2)
     - [Response body](#response-body-2)
+  - [List all registered Discord applications](#list-all-registered-discord-applications)
+    - [Request](#request-3)
+    - [Status codes](#status-codes-3)
+    - [Response](#response)
 - [WebSocket Endpoint](#websocket-endpoint)
     - [Searching a Discord application by name](#searching-a-discord-application-by-name)
 - [Useful Discord endpoints](#useful-discord-endpoints)
@@ -197,6 +201,43 @@ POST /report-inconsistency
 #### Response body
 
 The response always contains plain text with a status or error message.
+
+### List all registered Discord applications
+
+This endpoint lists all registered applications with their IDs, names
+and the date and time when the name was last verified.
+
+#### Request
+
+```
+GET /list
+```
+
+#### Status codes
+
+- **200** OK
+- **500** Internal Server Error
+  - A internal error occurred
+
+#### Response
+
+In the case of a 200 status code, the response body is always JSON
+with the following structure:
+
+```json
+[
+    {
+        "name": "One Republic",
+        "discord_application_id": "15497836517643166231",
+        "discord_application_client_id": "1875476348971658765334",
+        "last_verified": "2025-05-18T10:28:32.092Z"
+    },
+    // ...
+]
+```
+
+For all other status codes,
+the response is plain text with a status or error message.
 
 ## WebSocket Endpoint
 
