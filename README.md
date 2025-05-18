@@ -53,7 +53,7 @@ the comparison is case-sensitive.
 
 #### Request
 
-```json
+```
 POST /submit
 {
     "discord_application_client_id": "1875476348971658765334",
@@ -113,7 +113,7 @@ GET /search
 In the case of a 200 status code, the response body is always JSON
 with the following structure:
 
-```json
+```
 {
     "results": [
         {
@@ -146,7 +146,7 @@ the response is plain text with a status or error message.
 
 #### Example
 
-```json
+```
 GET /get?name=One%20Republic&case=false
 200 OK
 {
@@ -226,7 +226,7 @@ GET /list
 In the case of a 200 status code, the response body is always JSON
 with the following structure:
 
-```json
+```
 [
     {
         "name": "One Republic",
@@ -255,7 +255,7 @@ GET /ws
 
 Send a JSON message with the following format to perform a search:
 
-```json
+```
 {
     "id": 1,
     "type": "search",
@@ -276,7 +276,7 @@ as the query parameters of the `/get` HTTP endpoint.
 
 The server will respond with the following message:
 
-```json
+```
 {
     "id": 1,
     "type": "search",
