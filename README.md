@@ -67,6 +67,13 @@ GET /check
 
 #### Status codes
 
+- **200** OK
+  - One or more results are returned
+- **400** Bad Request
+  - One or more query parameters were missing or had invalid values
+- **500** Internal Server Error
+  - An internal error occurred
+
 #### Response body
 
 ```
