@@ -62,7 +62,8 @@ GET /check
 #### Query parameters
 
 - (string) `name` The required name of the of the Discord application.
-  This parameter is required
+  The name is matched in a case-sensitive way. This parameter is required.
+  You may set this parameter multiple times to check for multiple names.
 
 #### Status codes
 
@@ -70,9 +71,13 @@ GET /check
 
 ```
 {
-    "name": "...",
-    "available": true,
-    "limit_reached": true
+    "results": [
+        {
+            "name": "...",
+            "available": true,
+            "limit_reached": false
+        }
+    ]
 }
 ```
 
