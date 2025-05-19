@@ -401,11 +401,14 @@ provided by the above endpoints.
 1. Open https://discord.com/developers/applications
 2. Click on the "New Application" button
 3. Enter the text you want to see in your status under "Name"
-4. Optionally, choose a "Team" to register the application under
+4. Optionally, choose a "Team" to register the application under.
+   You will have to create a new team
+   under "Teams" ([link](https://discord.com/developers/teams))
+   once you have created 25 applications
 5. Click on "Create" to create the application
 6. A page should open with settings for the application
 7. Under "Settings" click on "OAuth2" to open the OAuth2 settings
 8. Under "Client information" there is a "Client ID".
    Copy this to your clipboard
-9. Use the selected "Name" and the copied "Client ID"
+9.  Use the selected "Name" and the copied "Client ID"
    for the `/submit` HTTP endpoint
