@@ -114,8 +114,8 @@ Check if a submission is necessary with the `/check` endpoint first.
 ```
 POST /submit
 {
-    "discord_application_client_id": "1875476348971658765334",
-    "expected_name": "One Republic"
+    "name": "One Republic",
+    "discord_application_client_id": "1875476348971658765334"
 }
 ```
 
