@@ -71,6 +71,8 @@ GET /check
   - One or more results are returned
 - **400** Bad Request
   - One or more query parameters were missing or had invalid values
+- **403** Forbidden
+  - Submissions are forbidden at this time
 - **500** Internal Server Error
   - An internal error occurred
 
@@ -138,6 +140,8 @@ POST /submit
 - **400** Bad Request
   - The Discord application could not be found with the given client ID or
   - The application's name does not have the expected name
+- **403** Forbidden
+  - Submissions are forbidden at this time
 - **409** Conflict
   - There are too many registered Discord applications for this name already or
   - The submission was rejected for another reason
@@ -145,7 +149,7 @@ POST /submit
   - Failed to verify the Discord application client ID
     with Discord the Discord API
 - **500** Internal Server Error
-  - A internal error occurred
+  - An internal error occurred
 - **504** Gateway Timeout
   - Verifying the Discord application client ID with the Discord API timed out
 
@@ -177,7 +181,7 @@ GET /search
 - **404** Not Found
   - No matches where found for the given search criteria
 - **500** Internal Server Error
-  - A internal error occurred
+  - An internal error occurred
 
 #### Response body
 
@@ -269,7 +273,7 @@ POST /report-inconsistency
 - **400** Bad Request
   - One or more query parameters were missing or had invalid values
 - **500** Internal Server Error
-  - A internal error occurred
+  - An internal error occurred
 
 #### Response body
 
@@ -290,7 +294,7 @@ GET /list
 
 - **200** OK
 - **500** Internal Server Error
-  - A internal error occurred
+  - An internal error occurred
 
 #### Response
 
